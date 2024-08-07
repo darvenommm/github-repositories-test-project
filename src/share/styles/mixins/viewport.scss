@@ -1,0 +1,29 @@
+@use '@/share/styles/variables' as vars;
+
+// Desktop First
+
+@mixin tablet {
+  @media (max-width: (vars.$desktop-breakpoint - 1px)) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: (vars.$tablet-breakpoint - 1px)) {
+    @content;
+  }
+}
+
+// Mobile First
+
+// @mixin tablet {
+//   @media (min-width: vars.$tablet-breakpoint) {
+//     @content;
+//   }
+// }
+
+// @mixin desktop {
+//   @media (min-width: vars.$desktop-breakpoint) {
+//     @content;
+//   }
+// }

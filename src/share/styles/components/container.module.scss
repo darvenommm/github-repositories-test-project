@@ -1,0 +1,20 @@
+@use '@/share/styles/variables' as vars;
+@use '@/share/styles/mixins';
+
+.container {
+  max-width: vars.$desktop-breakpoint;
+  padding-left: vars.$desktop-padding;
+  padding-right: vars.$desktop-padding;
+  margin: 0 auto;
+
+  @include mixins.tablet {
+    max-width: none;
+    padding-left: vars.$tablet-padding;
+    padding-right: vars.$tablet-padding;
+  }
+
+  @include mixins.mobile {
+    padding-left: vars.$mobile-padding;
+    padding-right: vars.$mobile-padding;
+  }
+}
