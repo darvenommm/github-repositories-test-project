@@ -23,6 +23,8 @@ export const buildPlugins = ({
   const definePlugin = new DefinePlugin({
     __IS_PROD__: JSON.stringify(isProduction),
     __IS_DEV__: JSON.stringify(isDevelopment),
+    __GITHUB_URL__: JSON.stringify(process.env.GITHUB_URL),
+    __GITHUB_TOKEN__: JSON.stringify(process.env.GITHUB_TOKEN),
   });
 
   const copyPlugin = new CopyPlugin({

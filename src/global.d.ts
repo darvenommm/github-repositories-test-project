@@ -4,7 +4,7 @@ declare module '*.module.css' {
 }
 
 declare module '*.module.scss' {
-  const classes: { [key: string]: string };
+  const classes: Record<string, string>;
   export default classes;
 }
 
@@ -72,3 +72,5 @@ declare module '*.svg?url' {
 
 declare const __IS_PROD__: boolean;
 declare const __IS_DEV__: boolean;
+declare const __GITHUB_URL__: string;
+declare const __GITHUB_TOKEN__: string;

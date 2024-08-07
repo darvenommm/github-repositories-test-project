@@ -17,8 +17,7 @@
 
 ## Notes
 
-1. Import module scss files only via \* (\* as styles)
-2. If you wanna add a new global variable to the project, you can do it in ./config/webpack/buildPlugins <- DefinePlugin <br>
+1. If you wanna add a new global variable to the project, you can do it in ./config/webpack/buildPlugins <- DefinePlugin <br>
    then add this value to global.d.ts in the src directory
-3. You can delete .keeper file from public directory if there will be files besides index.html in the public directory
-4. You can use .env file in the webpack config
+2. You can delete .keeper file from public directory if there will be files besides index.html in the public directory
+3. You can use .env file in the webpack config
