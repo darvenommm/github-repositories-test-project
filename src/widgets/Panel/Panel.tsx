@@ -7,13 +7,15 @@ interface IProperties {
   className?: string;
 }
 
-export const RepositoryPanel = ({ submitHandler, className }: IProperties): JSX.Element => {
+export const Panel = ({ submitHandler, className }: IProperties): JSX.Element => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const formSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    if (!inputRef.current) return;
+    if (!inputRef.current) {
+      return;
+    }
 
     submitHandler(inputRef.current.value);
   };

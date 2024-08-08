@@ -1,6 +1,6 @@
-import { gql } from '@apollo/client';
+import { gql } from '@/__generated__';
 
-export const GET_REPOSITORIES_BY_NAME = gql`
+export const GET_REPOSITORIES_BY_NAME = gql(`
   query repositoriesQuery($repositoryName: String!, $countOfRepositories: Int = 100) {
     search(query: $repositoryName, type: REPOSITORY, first: $countOfRepositories) {
       repositoryCount
@@ -21,4 +21,4 @@ export const GET_REPOSITORIES_BY_NAME = gql`
       }
     }
   }
-`;
+`);

@@ -1,5 +1,11 @@
 import { useQuery } from '@apollo/client';
-import { GET_REPOSITORIES_BY_NAME } from './api/getRepositoryByName';
+
+import {
+  formatRepositories,
+  GET_REPOSITORIES_BY_NAME,
+  RepositoryTable,
+  filterByTitle,
+} from '@/entities/repository';
 
 interface IProperties {
   repositoryName: string;
@@ -7,17 +13,34 @@ interface IProperties {
 }
 
 export const Repositories = ({ repositoryName, className }: IProperties): JSX.Element => {
-  const { data, loading, error } = useQuery(GET_REPOSITORIES_BY_NAME, {
+  const {
+    data: gottenRepositories,
+    loading,
+    error,
+  } = useQuery(GET_REPOSITORIES_BY_NAME, {
     variables: {
       repositoryName,
       countOfRepositories: 100,
     },
   });
 
-  if (loading) return <p>loading...</p>;
-  if (error) return <p>Error {error.message}</p>;
+  if (loading) {
+    return <p>Загрузка...</p>;
+  }
 
-  console.log(data);
+  if (error) {
+    return <p>Ошибка: {error.message}</p>;
+  }
 
-  return <div className={className}>Got data</div>;
+  const repositories = formatRepositories(gottenRepositories);
+
+  if (!repositories) {
+    return <p>Не были получены данные или они не корректные</p>;
+  }
+
+  return (
+    <div className={className}>
+      <RepositoryTable repositories={filterByTitle(repositories, repositoryName)} />
+    </div>
+  );
 };
