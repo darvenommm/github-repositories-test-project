@@ -1,5 +1,5 @@
-@use '@/share/styles/variables' as vars;
-@use '@/share/styles/mixins';
+@use "@/share/styles/variables" as vars;
+@use "@/share/styles/mixins";
 
 .container {
   max-width: vars.$desktop-breakpoint;

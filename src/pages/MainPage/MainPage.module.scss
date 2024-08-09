@@ -1,0 +1,47 @@
+@use "@/share/styles/variables" as vars;
+
+.main {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100vh;
+  padding-bottom: 32px;
+
+  &::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: #4f4f4f;
+
+    height: 32px;
+
+    content: "";
+  }
+}
+
+.searchPanel {
+  background-color: vars.$extra-bg-color;
+
+  padding: 19px 0;
+}
+
+.startTextContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 46px;
+  line-height: 66px;
+  color: vars.$secondary-text-color;
+
+  flex-grow: 1;
+
+  p {
+    transform: translateY(-5%);
+  }
+}

@@ -1,4 +1,4 @@
-@use '@/share/styles/variables' as vars;
+@use "@/share/styles/variables" as vars;
 
 *,
 *::before,
@@ -8,6 +8,9 @@
 
 body {
   color: vars.$primary-text-color;
+  font-size: 14px;
+  line-height: 24px;
+  font-family: "Roboto", sans-serif;
 
   background-color: vars.$primary-bg-color;
 

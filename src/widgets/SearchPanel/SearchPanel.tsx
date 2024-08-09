@@ -1,4 +1,7 @@
 import { useRef } from 'react';
+import { clsx } from 'clsx';
+
+import * as classes from './SearchPanel.module.scss';
 
 import type { FormEvent } from 'react';
 
@@ -21,11 +24,16 @@ export const SearchPanel = ({ submitHandler, className }: IProperties): JSX.Elem
   };
 
   return (
-    <div className={className}>
-      <form onSubmit={formSubmitHandler}>
-        <input ref={inputRef} type="text" placeholder="Введите поисковый запрос" />
-        <button type="submit">Искать</button>
-      </form>
-    </div>
+    <form className={clsx(className, classes.container)} onSubmit={formSubmitHandler}>
+      <input
+        className={classes.input}
+        ref={inputRef}
+        type="text"
+        placeholder="Введите поисковый запрос"
+      />
+      <button className={classes.button} type="submit">
+        Искать
+      </button>
+    </form>
   );
 };
