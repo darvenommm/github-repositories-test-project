@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { clsx } from 'clsx';
 
-import { Panel } from '@/widgets/Panel';
+import { SearchPanel } from '@/widgets/SearchPanel';
 import { Repositories } from '@/widgets/Repositories';
 
 import * as containerClass from '@/share/styles/components/container.module.scss';
@@ -11,7 +11,7 @@ export const MainPage = (): JSX.Element => {
 
   return (
     <main>
-      <Panel className={clsx(containerClass.container)} submitHandler={setRepositoryName} />
+      <SearchPanel className={clsx(containerClass.container)} submitHandler={setRepositoryName} />
       {repositoryName ? <Repositories repositoryName={repositoryName} /> : 'Добро пожаловать'}
     </main>
   );

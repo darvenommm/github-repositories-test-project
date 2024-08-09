@@ -17,6 +17,7 @@ export const formatRepositories = (repositories?: RepositoriesQueryQuery): null 
       const beautifulUpdateAt = prettyDate(Number(new Date(repository.updatedAt)), 'date-time');
 
       return {
+        id: repository.id,
         title: repository.name,
         forkCount: repository.forkCount,
         starsCount: repository.stargazerCount,

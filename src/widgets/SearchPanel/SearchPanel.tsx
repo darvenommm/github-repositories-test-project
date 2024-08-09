@@ -7,7 +7,7 @@ interface IProperties {
   className?: string;
 }
 
-export const Panel = ({ submitHandler, className }: IProperties): JSX.Element => {
+export const SearchPanel = ({ submitHandler, className }: IProperties): JSX.Element => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const formSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {

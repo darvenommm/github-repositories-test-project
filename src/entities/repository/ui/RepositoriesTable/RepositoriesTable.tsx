@@ -6,8 +6,8 @@ interface IProperties {
 
 export const RepositoryTable = ({ repositories }: IProperties): JSX.Element => {
   const rows = repositories.map(
-    ({ title, language, forkCount, starsCount, updatedAt }): JSX.Element => (
-      <tr key={title}>
+    ({ id, title, language, forkCount, starsCount, updatedAt }): JSX.Element => (
+      <tr key={id}>
         <td>{title}</td>
         <td>{language}</td>
         <td>{forkCount}</td>

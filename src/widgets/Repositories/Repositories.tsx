@@ -1,10 +1,11 @@
+import { useState, useLayoutEffect } from 'react';
 import { useQuery } from '@apollo/client';
 
+import { PaginationControls } from '@/share/ui/PaginationControls';
 import {
   formatRepositories,
   GET_REPOSITORIES_BY_NAME,
   RepositoryTable,
-  filterByTitle,
 } from '@/entities/repository';
 
 interface IProperties {
@@ -13,14 +14,25 @@ interface IProperties {
 }
 
 export const Repositories = ({ repositoryName, className }: IProperties): JSX.Element => {
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [countAtPage, setCountAtPage] = useState<number>(10);
+  const [startCursor, setStartCursor] = useState<null | string>(null);
+  const [endCursor, setEndCursor] = useState<null | string>(null);
+
+  useLayoutEffect((): void => setCurrentPage(1), [repositoryName]);
+
+  console.log(countAtPage);
+
   const {
-    data: gottenRepositories,
+    data: repositoriesData,
     loading,
     error,
   } = useQuery(GET_REPOSITORIES_BY_NAME, {
     variables: {
       repositoryName,
-      countOfRepositories: 100,
+      countOfRepositories: countAtPage,
+      after: endCursor,
+      before: startCursor,
     },
   });
 
@@ -32,7 +44,7 @@ export const Repositories = ({ repositoryName, className }: IProperties): JSX.El
     return <p>Ошибка: {error.message}</p>;
   }
 
-  const repositories = formatRepositories(gottenRepositories);
+  const repositories = formatRepositories(repositoriesData);
 
   if (!repositories) {
     return <p>Не были получены данные или они не корректные</p>;
@@ -40,7 +52,23 @@ export const Repositories = ({ repositoryName, className }: IProperties): JSX.El
 
   return (
     <div className={className}>
-      <RepositoryTable repositories={filterByTitle(repositories, repositoryName)} />
+      <RepositoryTable repositories={repositories} />
+      <PaginationControls
+        currentPage={currentPage}
+        totalCount={repositoriesData!.search.repositoryCount}
+        countAtPage={countAtPage}
+        changeCountAtPageHandler={setCountAtPage}
+        clickPreviousHandler={() => {
+          setEndCursor(null);
+          setStartCursor(repositoriesData!.search.pageInfo.startCursor!);
+          setCurrentPage((previous) => previous - 1);
+        }}
+        clickNextHandler={() => {
+          setStartCursor(null);
+          setEndCursor(repositoriesData!.search.pageInfo.endCursor!);
+          setCurrentPage((previous) => previous + 1);
+        }}
+      />
     </div>
   );
 };
