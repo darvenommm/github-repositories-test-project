@@ -2,12 +2,16 @@ import { IRepository } from '../../model/types/repository';
 
 interface IProperties {
   repositories: IRepository[];
+  clickRepositoryHandle: (repositoryId: string) => void;
 }
 
-export const RepositoryTable = ({ repositories }: IProperties): JSX.Element => {
+export const RepositoryTable = ({
+  repositories,
+  clickRepositoryHandle,
+}: IProperties): JSX.Element => {
   const rows = repositories.map(
     ({ id, title, language, forkCount, starsCount, updatedAt }): JSX.Element => (
-      <tr key={id}>
+      <tr key={id} onClick={() => clickRepositoryHandle(id)}>
         <td>{title}</td>
         <td>{language}</td>
         <td>{forkCount}</td>

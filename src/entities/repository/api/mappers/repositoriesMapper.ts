@@ -1,10 +1,10 @@
-import type { RepositoriesQueryQuery } from '@/__generated__/graphql';
+import type { RepositoriesByNameQuery } from '@/__generated__/graphql';
 
 import { prettyDate } from '@based/pretty-date';
 
-import { IRepository } from '../../model/types/repository';
+import { IRepository } from '@/entities/repository';
 
-export const formatRepositories = (repositories?: RepositoriesQueryQuery): null | IRepository[] => {
+export const mapRepositories = (repositories?: RepositoriesByNameQuery): null | IRepository[] => {
   const formattedRepositories = repositories?.search.edges?.map(
     (repositoryNode): null | IRepository => {
       const repository = repositoryNode?.node;

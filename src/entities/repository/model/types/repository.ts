@@ -6,3 +6,9 @@ export interface IRepository {
   language: string;
   updatedAt: string;
 }
+
+export interface IRepositoryDescriptionInfo {
+  title: string;
+  description: string;
+  licenseName: string;
+}

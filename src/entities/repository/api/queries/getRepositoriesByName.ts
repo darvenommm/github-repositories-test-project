@@ -1,8 +1,8 @@
 import { gql } from '@/__generated__';
 
 export const GET_REPOSITORIES_BY_NAME = gql(`
-  query repositoriesQuery($repositoryName: String!, $countOfRepositories: Int = 100, $after: String, $before: String) {
-    search(query: $repositoryName, type: REPOSITORY, first: $countOfRepositories, after: $after, before: $before) {
+  query repositoriesByName($repositoriesQuery: String!, $first: Int, $last: Int, $after: String, $before: String) {
+    search(query: $repositoriesQuery, type: REPOSITORY, first: $first, last: $last, after: $after, before: $before) {
       repositoryCount
       pageInfo {
         startCursor
