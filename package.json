@@ -1,7 +1,7 @@
 {
-  "name": "shop",
+  "name": "test-task",
   "version": "1.0.0",
-  "description": "It's a project for improving my skills in frontend",
+  "description": "Test task",
   "main": "./src/index.ts",
   "scripts": {
     "start": "webpack serve --watch",

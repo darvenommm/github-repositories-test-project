@@ -1,0 +1,54 @@
+@use "@/share/styles/mixins";
+
+.table {
+  table-layout: fixed;
+  border-collapse: collapse;
+
+  width: 100%;
+}
+
+.header {
+  font-weight: 500;
+}
+
+.row {
+  position: relative;
+
+  transition: background-color 200ms;
+
+  &::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+
+    background-color: rgba(0, 0, 0, 0.3);
+
+    height: 1px;
+
+    content: "";
+  }
+}
+
+.rowActive {
+  cursor: pointer;
+
+  @include mixins.hover {
+    background-color: rgb(33, 150, 243, 0.1);
+  }
+
+  @include mixins.active {
+    background-color: rgb(33, 150, 243, 0.2);
+  }
+}
+
+.cell {
+  font-size: 14px;
+  line-height: 20px;
+
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+
+  padding: 16px 10px;
+  width: calc(100% / 5);
+}

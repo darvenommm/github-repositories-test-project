@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { clsx } from 'clsx';
 
 import { SearchPanel } from '@/widgets/SearchPanel';
 import { Repositories } from '@/widgets/Repositories';
@@ -18,15 +19,15 @@ export const MainPage = (): JSX.Element => {
       <div className={classes.searchPanel}>
         <SearchPanel submitHandler={setRepositoriesQuery} className={containerClass.container} />
       </div>
-      {repositoriesQuery ? (
-        <div className={containerClass.container}>
+      <div className={clsx(containerClass.container, classes.contentContainer)}>
+        {repositoriesQuery ? (
           <Repositories repositoriesQuery={repositoriesQuery} />
-        </div>
-      ) : (
-        <div className={classes.startTextContainer}>
-          <p>Добро пожаловать</p>
-        </div>
-      )}
+        ) : (
+          <div className={classes.startTextContainer}>
+            <p>Добро пожаловать</p>
+          </div>
+        )}
+      </div>
     </main>
   );
 };

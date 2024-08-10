@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
+
+  margin: 0;
+}
+
+.description {
+  margin: 0;
+}
+
+.license {
+  line-height: 20px;
+
+  margin: 0;
+}
+
+.bold {
+  font-weight: 500;
+}

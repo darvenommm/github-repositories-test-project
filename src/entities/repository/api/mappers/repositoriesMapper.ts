@@ -14,7 +14,7 @@ export const mapRepositories = (repositories?: RepositoriesByNameQuery): null | 
       }
 
       const mainLanguage = repository.languages?.nodes?.[0]?.name ?? 'Не указан';
-      const beautifulUpdateAt = prettyDate(Number(new Date(repository.updatedAt)), 'date-time');
+      const beautifulUpdateAt = prettyDate(Number(new Date(repository.updatedAt)), 'date');
 
       return {
         id: repository.id,

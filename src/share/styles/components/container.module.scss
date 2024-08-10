@@ -6,6 +6,7 @@
   padding-left: vars.$desktop-padding;
   padding-right: vars.$desktop-padding;
   margin: 0 auto;
+  width: 100%;
 
   @include mixins.tablet {
     max-width: none;

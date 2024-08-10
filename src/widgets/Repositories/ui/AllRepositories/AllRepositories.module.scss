@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  flex-grow: 1;
+}
+
+.title {
+  font-size: 48px;
+  line-height: 56px;
+  font-weight: 400;
+
+  margin: 0;
+  margin-bottom: 24px;
+}
+
+.table {
+  margin-bottom: auto;
+}
+
+.controls {
+  margin-top: 20px;
+  margin-left: auto;
+}

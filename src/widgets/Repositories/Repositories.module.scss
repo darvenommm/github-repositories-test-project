@@ -1,0 +1,31 @@
+$top: 24px;
+
+.container {
+  display: grid;
+  grid-template-columns: minmax(200px, 912px) 1fr;
+  gap: 16px;
+
+  margin-top: $top;
+}
+
+.right {
+  position: relative;
+
+  padding: 24px;
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    top: -$top;
+    right: -1000px;
+    z-index: -1;
+
+    background-color: #f2f2f2;
+
+    content: "";
+  }
+}
+
+.rightDefaultText {
+  margin: 0;
+}
