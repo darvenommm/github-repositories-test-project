@@ -28,7 +28,7 @@ export const PaginationControls = ({
 }: IProperties): JSX.Element => {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const totalPagesCount = Math.ceil(totalCount / countAtPage);
+  const totalPagesCount = Math.ceil(totalCount / countAtPage) || 1;
 
   const formSubmitHandler = (event: FormEvent): void => {
     event.preventDefault();

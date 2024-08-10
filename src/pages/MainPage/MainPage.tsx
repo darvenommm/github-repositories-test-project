@@ -9,7 +9,7 @@ import * as visuallyHiddenClass from '@/share/styles/components/visuallyHidden.m
 import * as classes from './MainPage.module.scss';
 
 export const MainPage = (): JSX.Element => {
-  const [repositoriesQuery, setRepositoriesQuery] = useState<string>('');
+  const [repositoriesName, setrepositoriesName] = useState<string>('');
 
   return (
     <main className={classes.main}>
@@ -17,11 +17,11 @@ export const MainPage = (): JSX.Element => {
         Сайт для поиска репозиториев по ключевому слову.
       </h1>
       <div className={classes.searchPanel}>
-        <SearchPanel submitHandler={setRepositoriesQuery} className={containerClass.container} />
+        <SearchPanel submitHandler={setrepositoriesName} className={containerClass.container} />
       </div>
       <div className={clsx(containerClass.container, classes.contentContainer)}>
-        {repositoriesQuery ? (
-          <Repositories repositoriesQuery={repositoriesQuery} />
+        {repositoriesName ? (
+          <Repositories repositoriesName={repositoriesName} />
         ) : (
           <div className={classes.startTextContainer}>
             <p>Добро пожаловать</p>

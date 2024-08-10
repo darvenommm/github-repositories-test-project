@@ -4,7 +4,7 @@
   "description": "Test task",
   "main": "./src/index.ts",
   "scripts": {
-    "start": "webpack serve --watch",
+    "start": "webpack serve",
     "start:open": "webpack serve --env needOpening=true ",
     "build": "webpack --env mode=production",
     "preview": "http-server ./build --port 8080 --gzip",

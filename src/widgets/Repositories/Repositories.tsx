@@ -7,19 +7,19 @@ import { AllRepositories } from './ui/AllRepositories';
 import * as classes from './Repositories.module.scss';
 
 interface IProperties {
-  repositoriesQuery: string;
+  repositoriesName: string;
   className?: string;
 }
 
-export const Repositories = ({ repositoriesQuery, className }: IProperties): JSX.Element => {
+export const Repositories = ({ repositoriesName, className }: IProperties): JSX.Element => {
   const [chosenRepositoryUId, setChosenRepositoryId] = useState<null | string>(null);
 
-  useLayoutEffect((): void => setChosenRepositoryId(null), [repositoriesQuery]);
+  useLayoutEffect((): void => setChosenRepositoryId(null), [repositoriesName]);
 
   return (
     <div className={clsx(className, classes.container)}>
       <AllRepositories
-        repositoriesQuery={repositoriesQuery}
+        repositoriesName={repositoriesName}
         chooseRepositoryItemHandler={setChosenRepositoryId}
       />
       <div className={classes.right}>

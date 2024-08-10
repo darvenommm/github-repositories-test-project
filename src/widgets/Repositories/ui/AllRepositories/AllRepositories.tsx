@@ -5,16 +5,28 @@ import { clsx } from 'clsx';
 import { PaginationControls } from '@/share/ui/PaginationControls';
 import { RepositoryTable, mapRepositories, GET_REPOSITORIES_BY_NAME } from '@/entities/repository';
 
+import type { IRepository } from '@/entities/repository';
+
 import * as classes from './AllRepositories.module.scss';
 
 interface IProperties {
-  repositoriesQuery: string;
+  repositoriesName: string;
   chooseRepositoryItemHandler: (repositoryId: string) => void;
   className?: string;
 }
 
+type SortType = {
+  [Key in keyof Pick<IRepository, 'forkCount' | 'starsCount' | 'updatedAt'>]: string;
+};
+
+const sortType: SortType = {
+  forkCount: 'forks',
+  starsCount: 'stars',
+  updatedAt: 'updated',
+};
+
 export const AllRepositories = ({
-  repositoriesQuery,
+  repositoriesName,
   chooseRepositoryItemHandler,
   className,
 }: IProperties): JSX.Element => {
@@ -24,7 +36,13 @@ export const AllRepositories = ({
   const [startCursor, setStartCursor] = useState<null | string>(null);
   const [endCursor, setEndCursor] = useState<null | string>(null);
 
-  useLayoutEffect((): void => setCurrentPage(1), [repositoriesQuery]);
+  const [sortColumn, setSortColumn] = useState<keyof SortType>();
+
+  useLayoutEffect((): void => {
+    setCurrentPage(1);
+    setStartCursor(null);
+    setEndCursor(null);
+  }, [repositoriesName, countAtPage]);
 
   const {
     data: repositoriesData,
@@ -32,20 +50,25 @@ export const AllRepositories = ({
     error,
   } = useQuery(GET_REPOSITORIES_BY_NAME, {
     variables: {
-      repositoriesQuery,
+      repositoriesQuery: [
+        `${repositoriesName} in:name`,
+        sortColumn && `sort:${sortType[sortColumn]}`,
+      ]
+        .filter(Boolean)
+        .join(' '),
       [startCursor ? 'last' : 'first']: countAtPage,
       after: endCursor,
       before: startCursor,
     },
-    fetchPolicy: 'no-cache',
   });
 
-  if (loading) return <p>Загрузка...</p>;
-  if (error) return <p>Ошибка: {error.message}</p>;
+  if (loading) return <p className={classes.center}>Загрузка...</p>;
+  if (error) return <p className={classes.center}>Ошибка: {error.message}</p>;
 
   const repositories = mapRepositories(repositoriesData);
 
-  if (!repositories) return <p>Не были получены данные или они не корректные</p>;
+  if (!repositories)
+    return <p className={classes.center}>Не были получены данные или они не корректные</p>;
 
   return (
     <div className={clsx(className, classes.container)}>
@@ -53,6 +76,12 @@ export const AllRepositories = ({
       <RepositoryTable
         className={classes.table}
         repositories={repositories}
+        sortColumn={sortColumn}
+        columnSorters={{
+          starsCount: () => setSortColumn('starsCount'),
+          forkCount: () => setSortColumn('forkCount'),
+          updatedAt: () => setSortColumn('updatedAt'),
+        }}
         clickRepositoryHandle={chooseRepositoryItemHandler}
       />
       <PaginationControls
